@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Food Shop Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-box {
+      max-width: 350px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      margin-top: 100px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .login-box h2 {
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #d35400;
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    .btn-login {
+      width: 100%;
+      border-radius: 50px;
+    }
+
+    .error-msg {
+      color: red;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h2>🍔 Chick Point Login</h2>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" required />
+        </div>
+        <div class="error-msg" id="errorMsg">Invalid credentials. Try again.</div>
+        <button type="submit" class="btn btn-warning btn-login mt-3">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+      const username = email.split("@")[0];
+      localStorage.setItem("currentUser", username);
+
+      if (email === "admin@chick.com" && password === "123") {
+        window.location.href = "admin.html";
+      } else if (email.endsWith("@user.com") && password === "123") {
+        window.location.href = "user.html";
+      } else {
+        errorMsg.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

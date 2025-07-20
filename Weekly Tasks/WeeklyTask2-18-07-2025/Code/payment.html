@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment - Chick Point</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style> body { padding-top: 80px; background-color: #f8f9fa;  } 
+     .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+    }
+     .hover-shadow:hover {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(-4px);
+  }
+
+  .payment-option img {
+    height: 60px;
+    object-fit: contain;
+  }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">CHICK POINT</a>
+    <ul class="navbar-nav ms-auto gap-3">
+      <li class="nav-item">
+        <a class="nav-link active" href="home.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="User.html">Collection</a>
+      </li>
+   <li class="nav-item">
+  <a href="cart.html" class="btn btn-outline-light position-relative rounded-pill px-3">
+    🛒 Cart
+    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      0
+    </span>
+  </a>
+</li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="signin.html">Logout
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+</svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- <div class="container mt-5">
+  <div class="card p-4 shadow-sm">
+    <h3>Make Payment</h3>
+    <p>This is a simulated payment page.</p>
+    <button class="btn btn-success" onclick="completePayment()">Pay Now</button>
+  </div>
+</div> -->
+
+
+<div class="container mt-5">
+  <div class="card p-4 shadow-lg rounded-4 border-0">
+    <h3 class="mb-3 text-primary fw-bold text-center">Choose Your Payment Method</h3>
+    <p class="text-center mb-4">Secure & Fast. No actual payment will be processed.</p>
+
+    <div class="row justify-content-center g-4 text-center">
+      <div class="col-md-3">
+        <div class="payment-option border rounded-3 p-3 hover-shadow">
+          <img src="https://download.logo.wine/logo/Google_Pay/Google_Pay-Logo.wine.png" alt="GPay" class="img-fluid" />
+          <p class="mt-2 fw-semibold">Google Pay</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="payment-option border rounded-3 p-3 hover-shadow">
+          <img src="https://cdn.worldvectorlogo.com/logos/phonepe-1.svg" alt="PhonePe" class="img-fluid" />
+          <p class="mt-2 fw-semibold">PhonePe</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="payment-option border rounded-3 p-3 hover-shadow">
+            <img src="https://1000logos.net/wp-content/uploads/2021/03/Paytm_Logo.png" alt="Paytm" class="img-fluid" />
+
+          <p class="mt-2 fw-semibold">Paytm</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <button class="btn btn-success px-5 py-2 fs-5 rounded-pill shadow" onclick="completePayment()">
+        <i class="fas fa-check-circle me-2"></i>Pay Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function completePayment() {
+    const order = JSON.parse(localStorage.getItem("pendingOrder")) || [];
+    const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+   const username = localStorage.getItem("currentUser") || "Guest";
+
+const newOrder = {
+  id: Date.now(),
+  date: new Date().toLocaleString(),
+  items: order,
+  user: username,
+  status: "Pending"
+};
+    history.push(newOrder);
+    localStorage.setItem("orderHistory", JSON.stringify(history));
+    localStorage.removeItem("pendingOrder");
+    localStorage.removeItem("cartItems");
+    window.location.href = "success.html";
+  }
+</script>
+
+</body>
+</html>
