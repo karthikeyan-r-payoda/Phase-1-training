@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace Testapp
+{
+    public enum mvs
+    {
+        LEO, Beast, JanaNayagan
+    }
+
+    struct movie
+    {
+        public string movie_name;
+        public int seat;
+        public string theatre;
+
+        public movie(string _movie, int _seat, string _theatre)
+        {
+            movie_name = _movie;
+            seat = _seat;
+            theatre = _theatre;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<movie> allmovies = new List<movie>();
+            allmovies.Add(new movie(mvs.LEO.ToString(), 12, "Karpagam"));
+            allmovies.Add(new movie(mvs.Beast.ToString(), 100, "SAP"));
+            allmovies.Add(new movie(mvs.JanaNayagan.ToString(), 34, "Varanasi"));
+
+            Func<List<movie>, int> totSeats = (movies) =>
+            {
+                int tl = 0;
+                foreach (var a in movies)
+                {
+                    tl += a.seat;
+                }
+                return tl;
+            };
+
+            Debug.WriteLine("Movie List:");
+            foreach (var m in allmovies)
+            {
+                Debug.WriteLine("Movie: " + m.movie_name + ", Seats: " + m.seat + ", Theatre: " + m.theatre);
+            }
+
+            int t = totSeats(allmovies);
+            Debug.WriteLine("Total seats: " + t);
+        }
+    }
+}

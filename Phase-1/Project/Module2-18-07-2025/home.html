@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chick Point - Food Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .main-content {
+      padding-top: 100px;
+      padding-bottom: 60px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero-text {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #ffc107;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      color: #f8f9fa;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .card h5 {
+      color: #d35400;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #212529;
+      color: #ccc;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    a {
+      color: #ffc107;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-image"></div>
+  <div class="overlay"></div>
+
+  <div class="container main-content min-hv-100">
+    <div class="hero-text">
+      <h1>Welcome to Chick Point 🍗</h1>
+      <p>Spicy. Crispy. Delivered hot and fresh to your door.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card text-center p-4 h-100">
+          <h5>🔥 Always Hot</h5>
+          <p>We deliver every meal fresh off the stove. Taste the difference.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center p-4 h-100">
+          <h5>⚡ 30-Min Delivery</h5>
+          <p>Get your cravings satisfied in under 30 minutes. Guaranteed!</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center p-4 h-100">
+          <h5>💰 Amazing Deals</h5>
+          <p>Enjoy discounts up to 50% on selected combos every day.</p>
+        </div>
+      </div>
+
+    </div>
+  <div class="text-center mt-4">
+  <a href="user.html" class="btn btn-warning btn-lg px-4 fw-semibold rounded-pill shadow-sm">
+    🛒 Order Now
+  </a>
+</div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Chick Point. All rights reserved.</p>
+      <p>Follow us on <a href="#">Facebook</a> | <a href="#">Instagram</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

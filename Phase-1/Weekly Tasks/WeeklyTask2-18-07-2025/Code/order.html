@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Orders - Chick Point</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding-top: 80px; background-color: #f8f9fa; }
+    .card-img-top { height: 190px; object-fit: cover; }
+  footer {
+      background-color: #212529;
+      color: #ccc;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+    }
+
+    .order-header { background: #383838; color: #fff;
+         padding: 10px; border-radius: 5px; margin-bottom: 10px; 
+        }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">CHICK POINT</a>
+    <ul class="navbar-nav ms-auto gap-3">
+      <li class="nav-item">
+        <a class="nav-link active" href="home.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="User.html">Collection</a>
+      </li>
+   <li class="nav-item">
+  <a href="cart.html" class="btn btn-outline-light position-relative rounded-pill px-3">
+    🛒 Cart
+    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      0
+    </span>
+  </a>
+</li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="signin.html">Logout
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+</svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h2 class="mb-4 text-center navbar-brand text-warning">YOUR ORDERS</h2>
+  <div id="ordersContainer"></div>
+</div>
+<footer class="text-center">
+  <div class="container">
+    <p>&copy; 2025 Chick Point. All rights reserved.</p>
+    <p>
+      Follow us on
+      <a href="#">Facebook</a>,
+      <a href="#">Instagram</a>,
+      <a href="#">X</a>
+    </p>
+  </div>
+</footer>
+<script>
+  function renderOrders() {
+    const container = document.getElementById("ordersContainer");
+    const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+    const currentUser = localStorage.getItem("currentUser") || "Guest";
+
+    const userOrders = history.filter(order => order.user === currentUser);
+
+    if (userOrders.length === 0) {
+      container.innerHTML = `<p class="text-muted">No orders placed yet.</p>`;
+      return;
+    }
+
+    userOrders.reverse().forEach(order => {
+      const orderDiv = document.createElement("div");
+      const itemsHtml = order.items.map(item => {
+        const qty = parseInt(item.quantity) || 1;
+        const priceStr = (item.price || '').replace(/[^\d.]/g, '');
+        const price = parseFloat(priceStr) || 0;
+        const total = qty * price;
+
+        return `
+          <div class="col-md-3 mb-3">
+            <div class="card h-100">
+              <img src="${item.image || 'sheo1.jpg'}" class="card-img-top" alt="${item.title}">
+              <div class="card-body">
+                <h5>${item.title}</h5>
+                <p>Price: ₹${price.toFixed(2)}</p>
+                <p>Qty: ${qty}</p>
+                <p class="fw-bold">Total: ₹${total.toFixed(2)}</p>
+              </div>
+            </div>
+          </div>`;
+      }).join("");
+
+      const grandTotal = order.items.reduce((sum, i) => {
+        const priceStr = (i.price || '').replace(/[^\d.]/g, '');
+        const price = parseFloat(priceStr) || 0;
+        const qty = parseInt(i.quantity) || 1;
+        return sum + (price * qty);
+      }, 0).toFixed(2);
+
+      orderDiv.innerHTML = `
+        <div class="order-header">
+          <strong>Order ID:</strong> ${order.id} 
+          <span class="float-end">${order.date}</span>
+        </div>
+        <div class="row">${itemsHtml}</div>
+        <div class="text-end mt-2">
+          <span class="fw-bold">Grand Total: ₹${grandTotal}</span>
+        </div>
+        <hr>`;
+
+      container.appendChild(orderDiv);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", renderOrders);
+</script>
+
+
+</body>
+</html>
